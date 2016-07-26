@@ -1,0 +1,2 @@
+image/gif; eog %s
+image/*; mupdf %s
