@@ -5,6 +5,7 @@
 #   %APPDATA%\Rime       (windows)  
 
 patch:  
+  menu/page_size: 9
   schema_list:  
     - schema: luna_pinyin          # 朙月拼音  
     - schema: luna_pinyin_simp     # 朙月拼音 简化字模式  

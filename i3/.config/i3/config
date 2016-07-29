@@ -31,7 +31,7 @@ set $base0E #c0b7f9
 set $base0F #fcc09e
 
 hide_edge_borders both
-new_window none
+# new_window none
 # smart_borders on
 # gaps inner 0
 # gaps outer 0
@@ -152,6 +152,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# lock i3
+bindsym $mod+Ctrl+l exec "$HOME/.bin/scripts/lock.sh $HOME/Pictures/Icons/lock.png"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -233,4 +235,4 @@ bindsym --whole-window $mod+button2 floating toggle
 exec "ibus-daemon"
 exec "~/Code/XX-Net-3.1.4/start"
 # feh wallpaper
-exec_always "feh --bg-fill /home/raawaa/Pictures/Wallpapers/tokyoform/26709562344_52e89c72af_o.jpg"
+exec_always "feh --bg-fill /home/raawaa/Pictures/Wallpapers/tokyoform/17491581753_c2c5055c2b_o.jpg"

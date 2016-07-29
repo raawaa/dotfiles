@@ -53,7 +53,7 @@ plugins=(sudo z d ls extract cp git)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:$HOME/.bin/scripts:/usr/local/bin:$PATH
 export PATH=$HOME/Code/cocos2d-x-3.11.1/tools/cocos2d-console/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
