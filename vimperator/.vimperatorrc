@@ -1,0 +1,12 @@
+"3.14.0 (created: 2016/06/07 23:58:16)
+
+highlight Hint font-family: monospace; font-size: 11px; font-weight: bold; text-transform: uppercase; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px; 
+nnoremap J gT
+nnoremap K gt
+nnoremap yt :js<Space>util.copyToClipboard(content.document.title+'\n'+buffer.URL,<Space>true)<Return>
+set complete=slhb
+set "editor=emacsclient -c "
+set hintchars=hjklasdf
+source! /home/raawaa/.vimperatorrc.local
+
+" vim: set ft=vimperator:
