@@ -11,5 +11,10 @@ URxvt.letterSpace: -1
 URxvt.scrollBar: false
 URxvt*transparent: true
 URxvt*shading: 30
+
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+
 !#include ".Xresources.solarized.dark"
 #include "/home/raawaa/Code/gruvbox-contrib/xresources/gruvbox-dark.xresources"
