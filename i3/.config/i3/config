@@ -225,6 +225,8 @@ bindsym --release $mod+Print exec scrot -s 'screenshot_%Y-%m-%d-%H%M%S_$wx$h.png
 
 # The right button over a titlebar kills the window
 bindsym --release button3 kill
+# Middle mouse button toggle floating
+bindsym --release button2 floating toggle
 
 # The right button and a modifer over any part of the window kills the window
 # bindsym --whole-window $mod+button3 kill
