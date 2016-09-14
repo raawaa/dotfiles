@@ -2,7 +2,7 @@
 
 ## Installation
 
-Use `stow` to install these dofiles after clone this repo to your home directory.
+Use `stow` to install these dofiles after cloning this repo to your home directory.
 
 For example:
 
