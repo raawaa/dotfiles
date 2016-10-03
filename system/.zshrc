@@ -112,3 +112,7 @@ export PATH=$COCOS_X_ROOT:$PATH
 # Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
 export COCOS_TEMPLATES_ROOT=/home/raawaa/Code/cocos2d-x-3.11.1/templates
 export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+
+# import pinyin-completion
+# dependency: "pinyin-completion" in archlinuxcn repo
+source /usr/share/pinyin-completion/shell/pinyin-comp.zsh
