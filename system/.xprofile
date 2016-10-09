@@ -14,6 +14,11 @@ xset -b
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
-fcitx
+
+# fcitx
+
+# without desktop enviroment (eg. i3wm), xdg autostart desktop files
+# won't work. Fcitx must be started up manually.  The more elegant way I think
+# is to config fcitx startup in i3 config file, rather than here.
 
 xinput --set-prop 9 'libinput Accel Speed' -0.7

@@ -235,7 +235,8 @@ bindsym --release button2 floating toggle
 # bindsym button3 floating toggle
 bindsym --whole-window $mod+button2 floating toggle
 
-exec "ibus-daemon"
-exec "~/Code/XX-Net-3.1.4/start"
+# exec "ibus-daemon"
+exec "fcitx-autostart"
+# exec "~/Code/XX-Net-3.1.4/start"
 # feh wallpaper
 exec_always "feh --bg-fill /home/raawaa/Pictures/Wallpapers/tokyoform/26407564493_57599b3cfd_o.jpg"
