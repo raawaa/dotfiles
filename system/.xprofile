@@ -23,3 +23,6 @@ export XMODIFIERS="@im=fcitx"
 # is to config fcitx startup in i3 config file, rather than here.
 
 xinput --set-prop 9 'libinput Accel Speed' -0.7
+
+xrandr --ouput DVI-D-0 --auto --left-of DVI-I-0
+xrandr --dpi 96
