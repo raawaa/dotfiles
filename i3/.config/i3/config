@@ -84,6 +84,12 @@ bindsym $mod+z focus output left
 # Focus the output right to the current one
 bindsym $mod+x focus output right
 
+# Move the whole workspace to the left output
+bindsym $mod+Shift+z move workspace to output left
+
+# Move the whole workspace to the right output
+bindsym $mod+Shift+x move workspace to output right
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
