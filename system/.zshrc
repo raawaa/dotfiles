@@ -5,7 +5,9 @@ ZSH=/usr/share/oh-my-zsh/
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bira"
+# ZSH_THEME="bira"
+# ZSH_THEME="aussiegeek"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,7 +51,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(sudo z d ls extract cp git)
+plugins=(sudo z d ls extract cp git colored-man-pages colorize command-not-found autojump)
 
 # User configuration
 
@@ -96,7 +98,7 @@ alias ed="LC_CTYPE=zh_CN.UTF-8 emacs --daemon"
 alias ec="emacsclient"
 alias ecc="emacsclient -c"
 alias eds="emacsclient -e '(kill-emacs)'"
-alias yd="youtube-dl --proxy localhost:8087 --no-check-certificate"
+alias yd="youtube-dl --proxy localhost:8087 --no-check-certificate --external-downloader aria2c"
 export TERM=xterm-256color
 export EDITOR=nvim
 source /usr/share/doc/pkgfile/command-not-found.zsh
@@ -116,3 +118,11 @@ export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 # import pinyin-completion
 # dependency: "pinyin-completion" in archlinuxcn repo
 source /usr/share/pinyin-completion/shell/pinyin-comp.zsh
+
+# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+export COCOS_CONSOLE_ROOT=/home/raawaa/Code/cocos2d-x-3.14.1/tools/cocos2d-console/bin
+export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
+export COCOS_TEMPLATES_ROOT=/home/raawaa/Code/cocos2d-x-3.14.1/templates
+export PATH=$COCOS_TEMPLATES_ROOT:$PATH

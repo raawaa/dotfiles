@@ -18,10 +18,11 @@ order += "cpu_temperature 4"
 order += "cpu_temperature 5"
 # order += "ipv6"
 order += "disk /"
+order += "disk /home/raawaa/DATA"
 # order += "run_watch DHCP"
 # order += "run_watch VPN"
 # order += "wireless _first_"
-# order += "ethernet _first_"
+order += "ethernet _first_"
 # order += "battery 0"
 order += "load"
 order += "tztime local"
@@ -58,6 +59,10 @@ load {
 }
 
 disk "/" {
+        format = " %avail"
+}
+
+disk "/home/raawaa/DATA" {
         format = " %avail"
 }
 
