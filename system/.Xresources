@@ -5,11 +5,11 @@ xterm*locale:zh_CN.UTF-8
 xterm*metaSendsEscape:true
 xterm*saveLines:4096
 
-URxvt.font: xft:Hack:size=11.5:antialias=True, xft:文泉驿等宽微米黑:size=11.5:antialias=True
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=10.5:antialias=True:hinting=false:autohint=false, xft:文泉驿等宽微米黑:size=10.5:antialias=True:hinting=false:autohint=false
 URxvt.letterSpace: -1
 !URxvt.color12: rgb:5c/5c/ff
 URxvt.scrollBar: false
-URxvt*transparent: true
+!URxvt*transparent: true
 URxvt*shading: 30
 
 URxvt.perl-ext-common: default,matcher
