@@ -242,9 +242,9 @@ bindsym XF86AudioMute exec "amixer set Master toggle"
 bindsym $mod+Shift+s sticky toggle
 
 # scrot
-bindsym --release Print exec scrot 'screenshot_%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym --release Print exec scrot 'screenshot_%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/Pictures/ScreenShots/'
 # scrot - select window or rectangle
-bindsym --release $mod+Print exec scrot -s 'screenshot_%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/Pictures/'
+bindsym --release $mod+Print exec scrot -s 'screenshot_%Y-%m-%d-%H%M%S_$wx$h.png' -e 'mv $f ~/Pictures/ScreenShots/'
 
 # The right button over a titlebar kills the window
 bindsym --release button3 kill
@@ -261,7 +261,7 @@ bindsym --whole-window $mod+button2 floating toggle
 # start file manager daemon
 exec_always "pcmanfm -d &"
 # start compton
-exec "compton -b"
+exec "compton -b --no-fading-openclose"
 # exec "ibus-daemon"
 exec "fcitx-autostart"
 exec "~/Code/XX-Net-3.1.4/start"

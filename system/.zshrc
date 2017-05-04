@@ -103,6 +103,11 @@ export TERM=xterm-256color
 export EDITOR=nvim
 source /usr/share/doc/pkgfile/command-not-found.zsh
 
+# tex live config
+export PATH=/home/raawaa/.texlive2016/bin/x86_64-linux:$PATH
+export MANPATH=/home/raawaa/.texlive2016/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/home/raawaa/.texlive2016/texmf-dist/doc/info:$INFOPATH
+
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_CONSOLE_ROOT=/home/raawaa/Code/cocos2d-x-3.11.1/tools/cocos2d-console/bin
 export PATH=$COCOS_CONSOLE_ROOT:$PATH
