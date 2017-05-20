@@ -28,8 +28,7 @@ values."
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
-   ;; List of configuration layers to load. If it is the symbol `all' instead
-   ;; of a list then all discovered layers will be installed.
+   ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
      ;; ----------------------------------------------------------------
@@ -332,6 +331,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
 
+  (setq org-enforce-todo-dependencies t)
+  (setq org-stuck-projects
+        '("+TODO={PROJECT}/!-DONE" ("NEXT" "TODO") nil ""))
+  ;; (add-hook 'org-mode-hook (lambda () (setq org-enforce-todo-dependencies t)))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; FONTS
@@ -344,37 +347,37 @@ you should place you code here."
 
 
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- ;; org latex export
+  ;; org latex export
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- (setq org-latex-classes
-   (quote
-    (("ctexart" "\\documentclass[11pt]{ctexart}"
-      ("\\section{%s}" . "\\section*{%s}")
-      ("\\subsection{%s}" . "\\subsection*{%s}")
-      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-      ("\\paragraph{%s}" . "\\paragraph*{%s}")
-      ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-     ("article" "\\documentclass[11pt]{article}"
-      ("\\section{%s}" . "\\section*{%s}")
-      ("\\subsection{%s}" . "\\subsection*{%s}")
-      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-      ("\\paragraph{%s}" . "\\paragraph*{%s}")
-      ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-     ("report" "\\documentclass[11pt]{report}"
-      ("\\part{%s}" . "\\part*{%s}")
-      ("\\chapter{%s}" . "\\chapter*{%s}")
-      ("\\section{%s}" . "\\section*{%s}")
-      ("\\subsection{%s}" . "\\subsection*{%s}")
-      ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
-     ("book" "\\documentclass[11pt]{book}"
-      ("\\part{%s}" . "\\part*{%s}")
-      ("\\chapter{%s}" . "\\chapter*{%s}")
-      ("\\section{%s}" . "\\section*{%s}")
-      ("\\subsection{%s}" . "\\subsection*{%s}")
-      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
- (setq-default TeX-engine 'xetex)
- (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  )
+  ;; (setq org-latex-classes
+  ;;       (quote
+  ;;        (("ctexart" "\\documentclass[11pt]{ctexart}"
+  ;;          ("\\section{%s}" . "\\section*{%s}")
+  ;;          ("\\subsection{%s}" . "\\subsection*{%s}")
+  ;;          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ;;          ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ;;          ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+  ;;         ("article" "\\documentclass[11pt]{article}"
+  ;;          ("\\section{%s}" . "\\section*{%s}")
+  ;;          ("\\subsection{%s}" . "\\subsection*{%s}")
+  ;;          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+  ;;          ("\\paragraph{%s}" . "\\paragraph*{%s}")
+  ;;          ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+  ;;         ("report" "\\documentclass[11pt]{report}"
+  ;;          ("\\part{%s}" . "\\part*{%s}")
+  ;;          ("\\chapter{%s}" . "\\chapter*{%s}")
+  ;;          ("\\section{%s}" . "\\section*{%s}")
+  ;;          ("\\subsection{%s}" . "\\subsection*{%s}")
+  ;;          ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+  ;;         ("book" "\\documentclass[11pt]{book}"
+  ;;          ("\\part{%s}" . "\\part*{%s}")
+  ;;          ("\\chapter{%s}" . "\\chapter*{%s}")
+  ;;          ("\\section{%s}" . "\\section*{%s}")
+  ;;          ("\\subsection{%s}" . "\\subsection*{%s}")
+  ;;          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
+  ;; (setq-default TeX-engine 'xetex)
+  ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  ;; )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -389,10 +392,10 @@ you should place you code here."
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(canlock-password "bb53eda441661a871333a3db1a19a7224895aea0")
  '(hl-sexp-background-color "#efebe9")
- '(org-agenda-files (quote ("~/yuwenjie_gtd/yuwenjie_gtd.org")))
+ '(org-agenda-files (quote ("~/nutstore/GTD/todo.org")))
  '(package-selected-packages
    (quote
-    (winum log4e request flycheck diminish bind-key auto-complete avy anaconda-mode company highlight evil helm helm-core async f dash fuzzy spinner js2-mode powerline org pcache alert markdown-mode multiple-cursors hydra projectile magit magit-popup git-commit with-editor smartparens iedit dash-functional tern chinese-pyim-basedict bind-map yasnippet packed auctex hide-comnt livid-mode skewer-mode yapfify uuidgen py-isort org-projectile org-download simple-httpd live-py-mode link-hint git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump column-enforce-mode yaml-mode xterm-color ws-butler window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox pangu-spacing page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md ggtags flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help elisp-slime-nav disaster define-word cython-mode company-tern company-statistics company-quickhelp company-c-headers company-auctex company-anaconda coffee-mode cmake-mode clean-aindent-mode clang-format chinese-pyim buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell))))
+    (pinyinlib s winum log4e request flycheck diminish bind-key auto-complete avy anaconda-mode company highlight evil helm helm-core async f dash fuzzy spinner js2-mode powerline org pcache alert markdown-mode multiple-cursors hydra projectile magit magit-popup git-commit with-editor smartparens iedit dash-functional tern chinese-pyim-basedict bind-map yasnippet packed auctex hide-comnt livid-mode skewer-mode yapfify uuidgen py-isort org-projectile org-download simple-httpd live-py-mode link-hint git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump column-enforce-mode yaml-mode xterm-color ws-butler window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox pangu-spacing page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md ggtags flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help elisp-slime-nav disaster define-word cython-mode company-tern company-statistics company-quickhelp company-c-headers company-auctex company-anaconda coffee-mode cmake-mode clean-aindent-mode clang-format chinese-pyim buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

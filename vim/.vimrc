@@ -87,7 +87,7 @@ filetype plugin indent on    " required
 "
 
 syntax enable
-let mapleader = ","
+let mapleader = " "
 inoremap fd <esc>
 nnoremap <leader>w <c-w>v<c-w>l
 nnoremap <leader>q <c-w>q

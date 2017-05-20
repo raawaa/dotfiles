@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
 
@@ -99,7 +100,6 @@ alias ec="emacsclient"
 alias ecc="emacsclient -c"
 alias eds="emacsclient -e '(kill-emacs)'"
 alias yd="youtube-dl --proxy localhost:8087 --no-check-certificate --external-downloader aria2c"
-export TERM=xterm-256color
 export EDITOR=nvim
 source /usr/share/doc/pkgfile/command-not-found.zsh
 
