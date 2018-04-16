@@ -31,6 +31,10 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     javascript
+     html
+     csv
+     shell-scripts
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -40,13 +44,12 @@ values."
      ;; auto-completion
      ;; better-defaults
      (latex :variables
-            latex-build-command "LaTeX"
+            latex-build-command "LatexMk"
             latex-enable-auto-fill t)
      emacs-lisp
      git
      markdown
      yaml
-     javascript
      org
      gnus
      python
@@ -59,7 +62,7 @@ values."
             shell-default-height 30
             shell-default-position 'bottom
             shell-default-term-shell "/usr/bin/zsh")
-     chinese
+     ;; chinese
      ;; semantic
      gtags
      ;; spell-checking
@@ -99,9 +102,9 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https nil
+   dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 10
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -153,7 +156,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Hack"
+   dotspacemacs-default-font '("XHei OSX Mono"
                                :size 15
                                :weight normal
                                :width normal
@@ -321,6 +324,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq configuration-layer--elpa-archives
+        '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+          ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+          ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -331,20 +338,99 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
 
-  (setq org-enforce-todo-dependencies t)
-  (setq org-stuck-projects
-        '("+TODO={PROJECT}/!-DONE" ("NEXT" "TODO") nil ""))
   ;; (add-hook 'org-mode-hook (lambda () (setq org-enforce-todo-dependencies t)))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; email and newsgroup account
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq gnus-secondary-select-methods
+        '(
+          (nntp "newsfan"
+                (nntp-address "south.newsfan.net"))
+          (nnimap "yeah"
+                  (nnimap-address "imap.yeah.net")
+                  (nnimap-server-port 993)
+                  (nnimap-stream ssl)
+                  (nnimap-authinfo-file "~/authinfo"))
+          ))
+  (setq message-send-mail-function 'smtpmail-send-it
+        smtpmail-default-smtp-server "smtp.yeah.net")
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; gnus encoding
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; group name charset
+  (setq gnus-group-name-charset-method-alist
+        '(((nntp "newsfan") . chinese-gbk)))
+
+  ;; reading charset (group basis)
+  ;; (add-hook 'gnus-load-hook
+  ;;           (lambda nil
+  ;;             (setq gnus-default-charset 'cn-gb-2312)
+  ;;             (setq gnus-group-charset-alist (quote ((".*" chinese-gbk))))))
+  (setq gnus-group-charset-alist '((".*" chinese-gbk)))
+  ;; (setq gnus-group-charset-alist (quote ((".*" chinese-iso-8bit))))
+  ;; (add-to-list 'gnus-group-charset-alist
+  ;;              '(".*" chinese-gbk))
+
+  (setq mm-coding-system-priorities (quote (chinese-gbk gbk cn-gb-2312 gb2312 utf-8)))
+
+  ;; posting charset (group basis)
+  ;; (add-to-list 'gnus-newsgroup-variables 'mm-coding-system-priorities)
+  ;; (setq gnus-parameters
+  ;;       (nconc
+  ;;        '((".*"
+  ;;           (mm-coding-system-priorities
+  ;;            '(gbk utf-8))))
+  ;;        gnus-parameters))
+
+  (setq nnmail-pathname-coding-system (quote utf-8))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; gnus format
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15n  %B (%c) %s%)\n")
+  (setq gnus-thread-sort-functions (quote (gnus-thread-sort-by-most-recent-number)))
+  ;; (setq gnus-article-sort-functions (quote (gnus-summary-sort-by-most-recent-date)))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; gnus user profile
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq user-full-name "Yu Wenjie")
+  (setq user-mail-address "wenjie_yu@yeah.net")
+  (setq gnus-posting-styles
+        (quote
+         ((".*newsfan.*"
+           (name "raawaa")
+           (address "wenjie_yu@yeah.net")
+           (signature "时间就像女人的乳沟")))))
+  (setq org-default-notes-file "~/org/notes.org")
+  (define-key global-map "\C-cc" 'org-capture)
+
+  (with-eval-after-load 'org
+    (setq org-enforce-todo-dependencies t)
+    (setq org-stuck-projects
+          '("+TODO={PROJECT}/-DONE" ("TODO") () ""))
+    (setq org-default-notes-file "~/org/notes.org")
+    (setq org-capture-templates
+          '(("t" "Todo" entry (file+headline "~/org/todo.org" "Tasks")
+             "* TODO %?\n %i\n %a" :prepend t)
+            ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+             "* %?\nEntered on %U\n  %i\n  %a")
+            ("n" "Notes" entry (file+headline "~/org/todo.org" "Sometimes/Maybe")
+             "* %?\n %i\n %a" :prepend t)))
+)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; FONTS
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (spacemacs//set-monospaced-font "Hack" "文泉驿等宽微米黑" 15 18)
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (select-frame frame)
-              (spacemacs//set-monospaced-font "Hack" "文泉驿等宽微米黑" 15 18)))
-
+  ;; (spacemacs//set-monospaced-font "Hack" "文泉驿等宽微米黑" 14 16)
+  ;; (add-hook 'after-make-frame-functions
+  ;;           (lambda (frame)
+  ;;             (select-frame frame)
+  ;;             (spacemacs//set-monospaced-font "Hack" "文泉驿等宽微米黑" 14 16)))
+  ;; (custom-set-faces
+  ;;  '(org-table ((t (:family "XHei Apple Mono")))))
 
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; org latex export
@@ -377,7 +463,7 @@ you should place you code here."
   ;;          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
   ;; (setq-default TeX-engine 'xetex)
   ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-  ;; )
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -386,16 +472,11 @@ you should place you code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(canlock-password "bb53eda441661a871333a3db1a19a7224895aea0")
- '(hl-sexp-background-color "#efebe9")
- '(org-agenda-files (quote ("~/nutstore/GTD/todo.org")))
+ '(canlock-password "34a8092d6edb7e901b039c3ebab3064be69bb244")
+ '(org-agenda-files (quote ("~/org/todo.org")))
  '(package-selected-packages
    (quote
-    (pinyinlib s winum log4e request flycheck diminish bind-key auto-complete avy anaconda-mode company highlight evil helm helm-core async f dash fuzzy spinner js2-mode powerline org pcache alert markdown-mode multiple-cursors hydra projectile magit magit-popup git-commit with-editor smartparens iedit dash-functional tern chinese-pyim-basedict bind-map yasnippet packed auctex hide-comnt livid-mode skewer-mode yapfify uuidgen py-isort org-projectile org-download simple-httpd live-py-mode link-hint git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump column-enforce-mode yaml-mode xterm-color ws-butler window-numbering which-key web-beautify volatile-highlights vi-tilde-fringe use-package toc-org spacemacs-theme spaceline smooth-scrolling smeargle shell-pop restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox pangu-spacing page-break-lines orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md ggtags flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help elisp-slime-nav disaster define-word cython-mode company-tern company-statistics company-quickhelp company-c-headers company-auctex company-anaconda coffee-mode cmake-mode clean-aindent-mode clang-format chinese-pyim buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell))))
+    (gitignore-mode epl pythonic org-mime web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data org-category-capture alert projectile ghub let-alist packed avy anaconda-mode dash-functional tern iedit highlight f s skewer-mode simple-httpd hydra auctex-latexmk csv-mode insert-shebang fish-mode company-shell yapfify which-key use-package toc-org spaceline restart-emacs persp-mode org-projectile org-download neotree live-py-mode js2-refactor helm-company git-link ggtags expand-region evil-search-highlight-persist evil-mc evil-exchange dumb-jump company-c-headers aggressive-indent adaptive-wrap ace-link auctex company smartparens evil flycheck yasnippet helm helm-core markdown-mode org-plus-contrib magit magit-popup git-commit with-editor async dash js2-mode yaml-mode xterm-color ws-butler winum web-beautify volatile-highlights vi-tilde-fringe uuidgen undo-tree smeargle shell-pop rainbow-delimiters pyvenv pytest pyenv-mode py-isort powerline popwin pip-requirements pcre2el paradox orgit org-present org-pomodoro org-bullets open-junk-file multiple-cursors multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js-doc info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-c-yasnippet helm-ag goto-chg google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav disaster diminish define-word cython-mode company-tern company-statistics company-auctex company-anaconda column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format bind-key auto-yasnippet auto-highlight-symbol auto-compile ace-window ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

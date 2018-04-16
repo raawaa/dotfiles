@@ -145,5 +145,7 @@ nnoremap <F5> :call ToggleBackground()<CR>
 inoremap <F5> <ESC>:call ToggleBackground()<CR>a
 vnoremap <F5> <ESC>:call ToggleBackground()<CR>
 
+noremap ;; :%s:::g<Left><Left><Left>
+noremap ; :%s:::cg<Left><Left><Left><Left>
 
 

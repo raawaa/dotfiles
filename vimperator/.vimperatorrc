@@ -1,4 +1,4 @@
-"3.14.0 (created: 2016/06/07 23:58:16)
+"3.16.0 (created: 2017/02/01 00:55:15)
 
 highlight Hint font-family: monospace; font-size: 11px; font-weight: bold; text-transform: uppercase; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px; 
 nnoremap J gT
@@ -7,6 +7,7 @@ nnoremap yt :js<Space>util.copyToClipboard(content.document.title+'\n'+buffer.UR
 set complete=slhb
 set "editor=emacsclient -c "
 set hintchars=hjklasdf
+set "nextpattern=\\bnext\\b,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b,下一頁,下一页"
 source! /home/raawaa/.vimperatorrc.local
 
 " vim: set ft=vimperator:

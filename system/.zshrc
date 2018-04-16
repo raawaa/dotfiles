@@ -1,14 +1,20 @@
-export TERM="xterm-256color"
-# Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# ZSH_THEME="bira"
-# ZSH_THEME="aussiegeek"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# Path to your oh-my-zsh installation.
+  export ZSH=/home/raawaa/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="agnoster"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -18,7 +24,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+# DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -52,19 +58,16 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(sudo z d ls extract cp git colored-man-pages colorize command-not-found autojump)
-
-# User configuration
-
-export PATH=$HOME/.bin:$HOME/.bin/scripts:/usr/local/bin:$PATH
-export PATH=$HOME/Code/cocos2d-x-3.11.1/tools/cocos2d-console/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
+plugins=(sudo z ls extract git colored-man-pages colorize)
 
 source $ZSH/oh-my-zsh.sh
 
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-export LANG=zh_CN.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -77,7 +80,7 @@ export LANG=zh_CN.UTF-8
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -88,46 +91,20 @@ export LANG=zh_CN.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# alias gst="git status"
-# alias gco="git checkout"
-# alias gcm="git checkout master"
-# alias gl="git pull"
-# alias gp="git push"
-# alias glog="git log --graph --oneline"
-
+export PATH=$HOME/.bin:$HOME/.bin/scripts:/usr/local/bin:$PATH
+export LANG=zh_CN.UTF-8
 alias ed="LC_CTYPE=zh_CN.UTF-8 emacs --daemon"
 alias ec="emacsclient"
 alias ecc="emacsclient -c"
 alias eds="emacsclient -e '(kill-emacs)'"
-alias yd="youtube-dl --proxy localhost:8087 --no-check-certificate --external-downloader aria2c"
-export EDITOR=nvim
-source /usr/share/doc/pkgfile/command-not-found.zsh
-
-# tex live config
+alias yd="youtube-dl --proxy localhost:8087 --no-check-certificate"
+alias avrename="perl-rename 's/.*?(sd)?([a-zA-Z]+)-?(\d{3,})(?(?=(HD|FHD))(HD|FHD))([A-Z]?).*(\.\S+$)/\2-\3\6\7/'"
+alias javc="node /home/raawaa/Code/jav-scrapy/javc.js"
+alias javm="node /home/raawaa/Code/jav-scrapy/javm.js"
 export PATH=/home/raawaa/.texlive2016/bin/x86_64-linux:$PATH
 export MANPATH=/home/raawaa/.texlive2016/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/home/raawaa/.texlive2016/texmf-dist/doc/info:$INFOPATH
-
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=/home/raawaa/Code/cocos2d-x-3.11.1/tools/cocos2d-console/bin
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-# Add environment variable COCOS_X_ROOT for cocos2d-x
-export COCOS_X_ROOT=/home/raawaa/Code
-export PATH=$COCOS_X_ROOT:$PATH
-
-# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-export COCOS_TEMPLATES_ROOT=/home/raawaa/Code/cocos2d-x-3.11.1/templates
-export PATH=$COCOS_TEMPLATES_ROOT:$PATH
-
-# import pinyin-completion
-# dependency: "pinyin-completion" in archlinuxcn repo
-source /usr/share/pinyin-completion/shell/pinyin-comp.zsh
-
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=/home/raawaa/Code/cocos2d-x-3.14.1/tools/cocos2d-console/bin
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-export COCOS_TEMPLATES_ROOT=/home/raawaa/Code/cocos2d-x-3.14.1/templates
-export PATH=$COCOS_TEMPLATES_ROOT:$PATH
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/var/tmp

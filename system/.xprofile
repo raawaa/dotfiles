@@ -22,7 +22,7 @@ export XMODIFIERS="@im=fcitx"
 # won't work. Fcitx must be started up manually.  The more elegant way I think
 # is to config fcitx startup in i3 config file, rather than here.
 
-xinput --set-prop 9 'libinput Accel Speed' -0.7
+#xinput --set-prop 9 'libinput Accel Speed' -0.7
 
 # xrandr --output DVI-D-0 --auto --primary --left-of DVI-I-0
 # xrandr --dpi 96
