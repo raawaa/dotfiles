@@ -1,6 +1,6 @@
 set -x PATH $HOME/.bin $HOME/.bin/scripts /usr/local/bin $PATH
 set -x PATH /home/raawaa/.texlive2016/bin/x86_64-linux/ $PATH
-set -x MANPATH /home/raawaa/.texlive2016/texmf-dist/doc/man $MANPATH
+# set -x MANPATH /home/raawaa/.texlive2016/texmf-dist/doc/man $MANPATH
 set -x INFOPATH /home/raawaa/.texlive2016/texmf-dist/doc/info $INFOPATH
 
 set -x LANG zh_CN.UTF-8

@@ -1,0 +1,3 @@
+system/.config/mpd/**
+!system/.config/mpd/mpd.conf
+system/.config/mpv/watch_later/

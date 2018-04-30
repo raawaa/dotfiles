@@ -62,7 +62,7 @@ values."
             shell-default-height 30
             shell-default-position 'bottom
             shell-default-term-shell "/usr/bin/zsh")
-     ;; chinese
+     chinese
      ;; semantic
      gtags
      ;; spell-checking
@@ -156,7 +156,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("XHei OSX Mono"
+   dotspacemacs-default-font '("Noto Sans Mono CJK SC"
                                :size 15
                                :weight normal
                                :width normal
@@ -338,6 +338,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
 
+  (spacemacs//set-monospaced-font   "Noto Sans Mono CJK SC" "Noto Sans Mono CJK SC" 15 16)
+
   ;; (add-hook 'org-mode-hook (lambda () (setq org-enforce-todo-dependencies t)))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; email and newsgroup account
@@ -476,7 +478,7 @@ you should place you code here."
  '(org-agenda-files (quote ("~/org/todo.org")))
  '(package-selected-packages
    (quote
-    (gitignore-mode epl pythonic org-mime web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data org-category-capture alert projectile ghub let-alist packed avy anaconda-mode dash-functional tern iedit highlight f s skewer-mode simple-httpd hydra auctex-latexmk csv-mode insert-shebang fish-mode company-shell yapfify which-key use-package toc-org spaceline restart-emacs persp-mode org-projectile org-download neotree live-py-mode js2-refactor helm-company git-link ggtags expand-region evil-search-highlight-persist evil-mc evil-exchange dumb-jump company-c-headers aggressive-indent adaptive-wrap ace-link auctex company smartparens evil flycheck yasnippet helm helm-core markdown-mode org-plus-contrib magit magit-popup git-commit with-editor async dash js2-mode yaml-mode xterm-color ws-butler winum web-beautify volatile-highlights vi-tilde-fringe uuidgen undo-tree smeargle shell-pop rainbow-delimiters pyvenv pytest pyenv-mode py-isort powerline popwin pip-requirements pcre2el paradox orgit org-present org-pomodoro org-bullets open-junk-file multiple-cursors multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js-doc info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-c-yasnippet helm-ag goto-chg google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav disaster diminish define-word cython-mode company-tern company-statistics company-auctex company-anaconda column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format bind-key auto-yasnippet auto-highlight-symbol auto-compile ace-window ace-jump-helm-line ac-ispell))))
+    (pyim pyim-basedict pangu-spacing find-by-pinyin-dired ace-pinyin pinyinlib gitignore-mode epl pythonic org-mime web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data org-category-capture alert projectile ghub let-alist packed avy anaconda-mode dash-functional tern iedit highlight f s skewer-mode simple-httpd hydra auctex-latexmk csv-mode insert-shebang fish-mode company-shell yapfify which-key use-package toc-org spaceline restart-emacs persp-mode org-projectile org-download neotree live-py-mode js2-refactor helm-company git-link ggtags expand-region evil-search-highlight-persist evil-mc evil-exchange dumb-jump company-c-headers aggressive-indent adaptive-wrap ace-link auctex company smartparens evil flycheck yasnippet helm helm-core markdown-mode org-plus-contrib magit magit-popup git-commit with-editor async dash js2-mode yaml-mode xterm-color ws-butler winum web-beautify volatile-highlights vi-tilde-fringe uuidgen undo-tree smeargle shell-pop rainbow-delimiters pyvenv pytest pyenv-mode py-isort powerline popwin pip-requirements pcre2el paradox orgit org-present org-pomodoro org-bullets open-junk-file multiple-cursors multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js-doc info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-c-yasnippet helm-ag goto-chg google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav disaster diminish define-word cython-mode company-tern company-statistics company-auctex company-anaconda column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format bind-key auto-yasnippet auto-highlight-symbol auto-compile ace-window ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
