@@ -48,7 +48,7 @@ font-2 = "Noto Sans Mono:style=Regular:pixelsize=10;0"
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = filesystem volume memory cpu eth temperature date
+modules-right = filesystem memory cpu eth temperature date
 
 tray-position = right
 tray-padding = 2
@@ -99,7 +99,7 @@ font-2 = "Noto Sans Mono:style=Regular:pixelsize=10;0"
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = mpd date
+modules-right = mpd volume date
 
 tray-position = right
 tray-padding = 2
