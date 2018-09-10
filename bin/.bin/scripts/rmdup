@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+for e in *.jpg; do
+    if [[ -e ./posted_images/$e ]] {
+        rm -v $e;
+    }
+done;

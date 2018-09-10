@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# ======================================================================
+# Clean Kindle sdr folders.
+# ======================================================================
+
+for e in *.sdr; do
+    bname=${e%.*}
+    if [[ ! -e "$bname".azw3 && ! -e "$bname".mobi && ! -e "$bname".azw && ! -e "$bname".txt ]]; then
+        rm -vr "$e"
+    fi
+done

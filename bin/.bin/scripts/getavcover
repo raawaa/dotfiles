@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+for av in *; do
+    echo $av | awk 'BEGIN{FS="."} {print $1}' | xargs -I {} node /home/raawaa/Code/jav-scrapy/javc.js -o . -s {}
+    # echo $av 
+done
+

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+for f in "$@"; do
+    convert -verbose $f -trim +repage -resize "900x900>" ${f%.*}_trim_small.jpg && rm -v $f
+done

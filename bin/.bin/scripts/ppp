@@ -1,0 +1,90 @@
+#!/usr/bin/env zsh
+
+function usage {
+    echo -e "\e[33mPost number of pictures to the yssy bbs."
+    echo -e "usage: ${0##*/} [-b board] [-t title] [-c content] [-n number_of_files]"
+    echo -e "       ${0##*/} -h"
+    echo -e "\e[35mdefaults:"
+    echo -e "\ttitle=pwd"
+    echo -e "\tcontent=null"
+    echo -e "\tboard=ppperson"
+}
+
+while getopts :b:t:c:n:h OPT; do
+    case $OPT in
+        b|+b)
+            board="$OPTARG"
+            ;;
+        t|+t)
+            title="$OPTARG"
+            ;;
+        c|+c)
+            content="$OPTARG"
+            ;;
+        n|+n)
+            number="$OPTARG"
+            ;;
+        h|+h)
+            usage
+            exit 1
+            ;;
+        *)
+            # echo "usage: ${0##*/} [+-t ARG] [+-c ARG} [--] ARGS..."
+            usage
+            exit 2
+    esac
+done
+shift $(( OPTIND - 1 ))
+OPTIND=1
+
+files=(*.(png|PNG|jpg|JPG))
+dir=$(pwd)
+dir=${dir##*/}
+
+# set default parameter value
+if [[ -n $number && $number -gt ${#files[@]} ]]; then
+    number=${#files[@]}
+elif [[ ! -n $number ]]; then
+    number=10
+fi
+
+if [[ ! -n $title ]]; then
+    title=$dir
+    if [[ -f num.txt ]]; then
+        index=$(cat num.txt)
+        title+=" # "
+        title+=$index
+    fi
+fi
+
+function mk_posted_dir {
+    [[ ! -d posted_images ]] && mkdir posted_images
+    return 0
+}
+
+function update_num_file {
+    [[ -n $index ]] && echo $(($index+1)) >num.txt
+    return 0
+}
+
+function expand_filenames {
+    for elem in $@; do
+        echo -n "$(pwd)/$elem "
+    done
+}
+
+# # echo status
+# echo -e "\033[42;37m ========== START ========== \033[0m"
+# echo -e "\033[1m Title: \033[0m "${title}"\t\033[1mNumberOfPics:\033[0m "$number
+# echo -e "\033[1mContent:\033[0m "$content
+# echo ${files:0:${number}} &&
+
+[[ ! -d posted_images ]] && mkdir posted_images
+
+python2 ~/Code/yssybbsuploader/src/bbsupload.py -a ~/Code/yssybbsuploader/src/account.json -t "$title" -c "${content:- }" -b "${board:-ppperson}" $(expand_filenames ${files:0:$number}) &&
+    update_num_file &&
+    mk_posted_dir &&
+    mv -v $(expand_filenames ${files:0:$number}) posted_images
+rm -v *_resized_by_uploader*
+    
+    

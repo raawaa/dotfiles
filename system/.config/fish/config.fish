@@ -28,6 +28,7 @@ alias gp "git push"
 alias gcm "git checkout master"
 alias gaa "git add -A"
 alias gc "git commit"
+alias ec "emacsclient"
 
 begin
     set --local AUTOJUMP_PATH /usr/share/autojump/autojump.fish
@@ -35,3 +36,5 @@ begin
         source $AUTOJUMP_PATH
     end
 end
+
+fish_vi_key_bindings

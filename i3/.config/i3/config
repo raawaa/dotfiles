@@ -321,9 +321,10 @@ exec "compton -b --no-fading-openclose"
 # exec_always "compton -b"
 # exec "ibus-daemon"
 exec "fcitx-autostart"
+exec "nm-applet"
 # exec "~/Code/XX-Net/start"
 # feh wallpaper
 # exec_always "feh --bg-fill /home/raawaa/Pictures/Wallpapers/tokyoform/26407564493_57599b3cfd_o.jpg"
 exec "mpd"
-exec_always "feh --bg-fill --recursive --randomize ~/Pictures/Wallpapers"
+exec_always "feh --bg-fill --recursive --randomize ~/Pictures/Wallpapers/Shanghai"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh

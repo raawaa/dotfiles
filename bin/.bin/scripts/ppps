@@ -1,0 +1,85 @@
+#!/usr/bin/env zsh
+
+function usage {
+    echo -e "\e[33mPost pictures to yssy bbs."
+    echo -e "usage: ${0##*/} [-b board] [-t title] [-c content] pictures..."
+    echo -e "       ${0##*/} -h"
+    echo -e "\e[35mdefaults:"
+    echo -e "\ttitle=pwd"
+    echo -e "\tcontent=null"
+    echo -e "\tboard=ppperson"
+}
+
+while getopts :b:t:hc: OPT; do
+    case $OPT in
+        b|+b)
+            board="$OPTARG"
+            ;;
+        t|+t)
+            title="$OPTARG"
+            ;;
+        c|+c)
+            content="$OPTARG"
+            ;;
+        h|+h)
+            usage
+            exit 1
+            ;;
+        *)
+            echo "usage: ${0##*/} [+-t ARG] [+-c ARG} [--] ARGS..."
+            exit 2
+    esac
+done
+shift $(( OPTIND - 1 ))
+OPTIND=1
+
+files=(*.(png|PNG|jpg|JPG))
+dir=$(pwd)
+dir=${dir##*/}
+
+# set default parameter value
+# if [[ -n $number && $number -gt ${#files[@]} ]]; then
+#     number=${#files[@]}
+# elif [[ ! -n $number ]]; then
+#     number=10
+# fi
+
+if [[ ! -n $title ]]; then
+    title=$dir
+    if [[ -f num.txt ]]; then
+        index=$(cat num.txt)
+        title+=" # "
+        title+=$index
+    fi
+fi
+
+
+function mk_posted_dir {
+    [[ ! -d posted_images ]] && mkdir posted_images
+    return 0
+}
+
+function update_num_file {
+    [[ -n $index ]] && echo $(($index+1)) >num.txt
+    return 0
+}
+
+function print_list {
+    printf "\"%s\" " $1
+}
+
+function expand_filenames {
+    for elem in $@; do
+        elem=${elem##*/}
+        echo -n "$(pwd)/$elem "
+    done
+}
+
+[[ ! -d posted_images ]] && mkdir posted_images
+
+
+python2 ~/Code/yssybbsuploader/src/bbsupload.py -a ~/Code/yssybbsuploader/src/account.json -t "$title" -c "${content:- }" -b "${board:-ppperson}" $(expand_filenames $@) &&
+    update_num_file &&
+    mk_posted_dir &&
+    mv -v "$@" posted_images
+rm -v *_resized_by_uploader*
